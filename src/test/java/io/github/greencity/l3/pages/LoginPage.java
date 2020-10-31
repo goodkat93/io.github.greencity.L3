@@ -20,18 +20,18 @@ public class LoginPage {
         return this;
     }
     public LoginPage clickSignUp(){
-        driver.findElement(By.xpath("/html/body/app-root/app-header/div/div/div/div[2]/div[2]/ul/li[4]/div"))
+        driver.findElement(By.cssSelector("li.sign-up-link span"))
                 .click();
         return this;
     }
     public LoginPage setEmail(String email) {
-        driver.findElement(By.xpath("/html/body/div/div[2]/div/mat-dialog-container/app-auth-modal/div/div/div[2]/div/app-sign-up/div/form/div/input[1]"))
+        driver.findElement(By.xpath("//input[@formcontrolname='email']"))
                 .sendKeys(email);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         return this;
     }
     public LoginPage testEmail() {
-        driver.findElements(By.xpath("/html/body/div/div[2]/div/mat-dialog-container/app-auth-modal/div/div/div[2]/div/app-sign-up/div/form/div"));
+        driver.findElements(By.cssSelector("div.error-message>app-error>div"));
         String pageSource = driver.getPageSource();
         Assert.assertFalse(pageSource.contains("error-message ng-star-inserted"));
         driver.findElement(By.xpath("/html/body/div/div[2]/div/mat-dialog-container/app-auth-modal/div/div/div[2]/div/app-sign-up/div/form/div/input[1]")).clear();
@@ -47,7 +47,6 @@ public class LoginPage {
         driver.findElements(By.xpath("/html/body/div/div[2]/div/mat-dialog-container/app-auth-modal/div/div/div[2]/div/app-sign-up/div/form/div"));
         String pageSource = driver.getPageSource();
         Assert.assertTrue(pageSource.contains("error-message ng-star-inserted"));
-        driver.findElement(By.xpath("/html/body/div/div[2]/div/mat-dialog-container/app-auth-modal/div/div/div[2]/div/app-sign-up/div/form/div/input[1]")).clear();
         return this;
     }
 
